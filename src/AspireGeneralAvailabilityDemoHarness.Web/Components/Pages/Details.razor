@@ -1,0 +1,82 @@
+﻿@page "/details/{Id:int}"
+@inject NavigationManager Navigation
+@inject CartService CartService
+@using AspireGeneralAvailabilityDemoHarness.Web.Billing
+@using AspireGeneralAvailabilityDemoHarness.Web.Models
+
+<PageTitle>Raygun Details</PageTitle>
+
+@if (raygun != null)
+{
+  <div class="raygun-details">
+    <h3>@raygun.Name</h3>
+    <p>Price: $@raygun.Price</p>
+    <p>@raygun.Description</p>
+
+    <button @onclick="AddToCart">Add to Cart</button>
+  </div>
+}
+else
+{
+  <p>Loading...</p>
+}
+
+@code {
+  [Parameter]
+  public int Id { get; set; }
+
+  private Raygun raygun;
+
+  private List<Raygun> rayguns = new List<Raygun>
+  {
+    new Raygun { Id = 1, Name = "Zapper 2000", Price = 19.99, Description = "A powerful raygun for beginners." },
+    new Raygun { Id = 2, Name = "Laser Blaster", Price = 29.99, Description = "An advanced laser blaster for enthusiasts." },
+    new Raygun { Id = 3, Name = "Photon Shooter", Price = 39.99, Description = "The ultimate photon shooter for pros." }
+  };
+
+  protected override void OnParametersSet()
+  {
+    raygun = rayguns.FirstOrDefault(r => r.Id == Id);
+  }
+
+  private async Task AddToCart()
+  {
+    await CartService.AddToCart(Id);
+    // Optionally, navigate back to the main page or show a success message
+    Navigation.NavigateTo("/");
+  }
+}
+
+<style>
+    .raygun-details {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    .raygun-details h3 {
+        color: #333;
+        margin-bottom: 1rem;
+    }
+    .raygun-details p {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    .raygun-details button {
+        background-color: #61dafb;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+    .raygun-details button:hover {
+        background-color: #21a1f1;
+    }
+</style>

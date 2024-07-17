@@ -1,0 +1,62 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+@using AspireGeneralAvailabilityDemoHarness.Web.Models
+
+<PageTitle>Home</PageTitle>
+
+<h3>Toy Rayguns</h3>
+
+<div class="raygun-list">
+  @foreach (var raygun in rayguns)
+  {
+    var href = $"/details/{raygun.Id}";
+    <NavLink class="raygun-item" href=@href>
+      <h4>@raygun.Name</h4>
+      <p>Price: $@raygun.Price</p>
+    </NavLink>
+  }
+</div>
+
+@code {
+  private List<Raygun> rayguns = new List<Raygun>
+  {
+    new Raygun { Id = 1, Name = "Zapper 2000", Price = 19.99 },
+    new Raygun { Id = 2, Name = "Laser Blaster", Price = 29.99 },
+    new Raygun { Id = 3, Name = "Photon Shooter", Price = 39.99 }
+  };
+}
+
+<style>
+    .raygun-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .raygun-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        flex: 1 1 calc(33.333% - 2rem);
+        max-width: calc(33.333% - 2rem);
+        box-sizing: border-box;
+    }
+    .raygun-item:hover {
+        transform: scale(1.05);
+        background-color: #f9f9f9;
+    }
+    .raygun-item h4 {
+        margin: 0 0 0.5rem 0;
+        color: #333;
+    }
+    .raygun-item p {
+        margin: 0;
+        color: #666;
+    }
+</style>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>f86742aa-98c6-49c2-9c58-945398292628</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspireGeneralAvailabilityDemoHarness.Web\AspireGeneralAvailabilityDemoHarness.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="8.0.0" />
+    <PackageReference Include="Raygun.Aspire.Hosting.Ollama" Version="1.0.0" />
+    <PackageReference Include="Raygun.Aspire.Hosting.Raygun" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Raygun.Aspire.Hosting.Raygun">
+      <HintPath>C:\Users\Quant\Downloads\Raygun.Aspire.Hosting.Raygun.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
